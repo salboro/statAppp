@@ -5,6 +5,7 @@
     android:id="@+id/recycler"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginHorizontal="8dp"
     tools:listitem="@layout/feed_favorite_item"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
     android:orientation="horizontal" />
