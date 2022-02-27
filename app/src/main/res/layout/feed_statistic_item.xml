@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Currencies" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/moreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/more"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:paddingHorizontal="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/moreButton" />
+
+        <LinearLayout
+            android:id="@+id/firstGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/secondGroup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/firstTopicTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                tools:text="Dollar" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/firstCurrentValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                tools:text="72.01" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/firstDiffValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                tools:text="2.07" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/secondGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@id/thirdGroup"
+            app:layout_constraintStart_toEndOf="@id/firstGroup"
+            app:layout_constraintTop_toBottomOf="@id/divider">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/secondTopicTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                tools:text="Dollar" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/secondCurrentValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                tools:text="72.01" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/secondDiffValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                tools:text="2.07" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/thirdGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/secondGroup"
+            app:layout_constraintTop_toBottomOf="@id/divider">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/thirdTopicTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                tools:text="Dollar" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/thirdCurrentValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                tools:text="72.01" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/thirdDiffValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="MissingConstraints"
+                tools:text="2.07" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
