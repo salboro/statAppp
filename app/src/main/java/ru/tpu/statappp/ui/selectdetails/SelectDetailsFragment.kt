@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import ru.tpu.statappp.R
 import ru.tpu.statappp.databinding.FragmentSelectDetailsBinding
+import ru.tpu.statappp.presentation.selectdetails.SelectDetailsState
 import ru.tpu.statappp.presentation.selectdetails.SelectDetailsViewModel
+import ru.tpu.statappp.ui.details.DetailsFragment
 
 @AndroidEntryPoint
 class SelectDetailsFragment : Fragment() {
@@ -45,7 +48,23 @@ class SelectDetailsFragment : Fragment() {
 
         adapter = SelectDetailsAdapter(viewModel::selectDetails)
 
+        subscribeViewModel()
+
         binding?.recycler?.adapter = adapter
+    }
+
+    private fun subscribeViewModel() {
+        viewModel.state.observe(viewLifecycleOwner, ::renderState)
+        viewModel.navigateToDetailsEvent.observe(viewLifecycleOwner, ::navigateToDetails)
+    }
+
+    private fun renderState(state: SelectDetailsState) {}
+
+    private fun navigateToDetails(id: String) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.container, DetailsFragment.newInstance(id))
+            .addToBackStack(null)
+            .commit()
     }
 
     override fun onDestroyView() {
