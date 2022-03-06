@@ -15,14 +15,15 @@ class FeedViewModel @Inject constructor() : ViewModel() {
     private val _state = MutableLiveData<FeedState>(FeedState.Initial)
     val state: LiveData<FeedState> = _state
 
-    val navigateToMoreEvent = SingleLiveEvent<String>()
+    private val _navigateToMoreEvent = SingleLiveEvent<String>()
+    val navigateToMoreEvent: LiveData<String> = _navigateToMoreEvent
 
     fun loadData() {
 
     }
 
     fun selectTopic(topic: StatisticTopic) {
-        navigateToMoreEvent.value = topic.topicName
+        _navigateToMoreEvent.value = topic.topicName
     }
 
     fun selectFavorite(favorite: FavoriteCategory) {
