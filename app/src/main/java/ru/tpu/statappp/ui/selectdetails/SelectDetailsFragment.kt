@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import ru.tpu.statappp.databinding.FragmentSelectDetailsBinding
-import ru.tpu.statappp.domain.entity.SelectDetail
 import ru.tpu.statappp.presentation.selectdetails.SelectDetailsViewModel
 
+@AndroidEntryPoint
 class SelectDetailsFragment : Fragment() {
 
     companion object {

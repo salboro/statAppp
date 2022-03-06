@@ -4,18 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import ru.tpu.statappp.R
 import ru.tpu.statappp.databinding.FragmentFeedBinding
-import ru.tpu.statappp.domain.entity.ConcreteStatistic
-import ru.tpu.statappp.domain.entity.FavoriteCategory
-import ru.tpu.statappp.domain.entity.StatisticTopic
 import ru.tpu.statappp.presentation.feed.FeedViewModel
 import ru.tpu.statappp.ui.feed.adapter.FeedAdapter
 import ru.tpu.statappp.ui.selectdetails.SelectDetailsFragment
 
+@AndroidEntryPoint
 class FeedFragment : Fragment() {
 
     private var binding: FragmentFeedBinding? = null

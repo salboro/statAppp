@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import ru.tpu.statappp.databinding.FragmentDetailsBinding
 import ru.tpu.statappp.presentation.details.DetailsViewModel
 
+@AndroidEntryPoint
 class DetailsFragment : Fragment() {
 
     companion object {
