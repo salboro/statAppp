@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import ru.tpu.statappp.databinding.FragmentDetailsBinding
+import ru.tpu.statappp.presentation.details.DetailsState
 import ru.tpu.statappp.presentation.details.DetailsViewModel
 
 @AndroidEntryPoint
@@ -16,7 +17,7 @@ class DetailsFragment : Fragment() {
 
     companion object {
 
-        private const val ID_KEY = "ID_KEY"
+        const val ID_KEY = "ID_KEY"
 
         fun newInstance(id: String): Fragment =
             DetailsFragment().apply {
@@ -34,7 +35,13 @@ class DetailsFragment : Fragment() {
     ): View? {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
+        viewModel.state.observe(viewLifecycleOwner, ::renderState)
+
         return binding?.root
+    }
+
+    private fun renderState(state: DetailsState) {
+
     }
 
     override fun onDestroyView() {
