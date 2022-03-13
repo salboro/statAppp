@@ -8,4 +8,5 @@
     android:layout_marginHorizontal="8dp"
     tools:listitem="@layout/feed_favorite_item"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    android:orientation="horizontal" />
+    android:orientation="horizontal"
+    android:overScrollMode="never"/>

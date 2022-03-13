@@ -19,7 +19,7 @@ class FeedViewModel @Inject constructor() : ViewModel() {
     val navigateToMoreEvent: LiveData<String> = _navigateToMoreEvent
 
     fun loadData() {
-
+        _state.value = FeedState.Content(feedItems)
     }
 
     fun selectTopic(topic: StatisticTopic) {

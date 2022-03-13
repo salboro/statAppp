@@ -1,6 +1,7 @@
 package ru.tpu.statappp.ui.feed.adapter
 
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import ru.tpu.statappp.R
 import ru.tpu.statappp.databinding.FeedStatisticItemBinding
@@ -60,9 +61,11 @@ class FeedStatisticViewHolder(
         }
     }
 
-    private fun getDiffColor(value: Long) = if (value > 0) {
-        android.R.color.holo_green_dark
-    } else {
-        android.R.color.holo_red_dark
-    }
+    private fun getDiffColor(value: Double) = itemView.context.getColor(
+        if (value > 0) {
+            R.color.green
+        } else {
+            android.R.color.holo_red_dark
+        }
+    )
 }

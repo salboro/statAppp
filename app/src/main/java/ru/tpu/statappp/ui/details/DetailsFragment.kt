@@ -35,13 +35,27 @@ class DetailsFragment : Fragment() {
     ): View? {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
 
-        viewModel.state.observe(viewLifecycleOwner, ::renderState)
-
         return binding?.root
     }
 
-    private fun renderState(state: DetailsState) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        viewModel.state.observe(viewLifecycleOwner, ::renderState)
+
+        binding?.toolbar?.setNavigationOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+    }
+
+    private fun renderState(state: DetailsState) {
+        when(state) {
+            DetailsState.Initial -> Unit
+            DetailsState.Loading -> Unit
+            is DetailsState.Content -> {
+                binding?.toolbar?.title = state.title
+            }
+        }
     }
 
     override fun onDestroyView() {

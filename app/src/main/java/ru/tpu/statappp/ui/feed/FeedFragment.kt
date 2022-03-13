@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import ru.tpu.statappp.R
 import ru.tpu.statappp.databinding.FragmentFeedBinding
+import ru.tpu.statappp.presentation.feed.FeedState
 import ru.tpu.statappp.presentation.feed.FeedViewModel
 import ru.tpu.statappp.ui.feed.adapter.FeedAdapter
 import ru.tpu.statappp.ui.selectdetails.SelectDetailsFragment
@@ -38,7 +39,18 @@ class FeedFragment : Fragment() {
         adapter = FeedAdapter(viewModel::selectFavorite, viewModel::selectTopic)
         binding?.recycler?.adapter = adapter
 
+        viewModel.loadData()
+
         viewModel.navigateToMoreEvent.observe(viewLifecycleOwner, ::openSelectDetails)
+        viewModel.state.observe(viewLifecycleOwner, ::renderState)
+    }
+
+    private fun renderState(state: FeedState) {
+        when (state) {
+            FeedState.Initial -> Unit
+            FeedState.Loading -> Unit
+            is FeedState.Content -> adapter?.items = state.items
+        }
     }
 
     private fun openSelectDetails(topic: String) {

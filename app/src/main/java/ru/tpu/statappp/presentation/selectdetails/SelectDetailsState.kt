@@ -9,5 +9,5 @@ sealed interface SelectDetailsState {
 
     object Loading : SelectDetailsState
 
-    data class Content(val items: List<SelectDetail>) : SelectDetailsState
+    data class Content(val topic: String, val items: List<SelectDetail>) : SelectDetailsState
 }

@@ -3,9 +3,18 @@
 
     <style name="StatAppToolbar" parent="Widget.MaterialComponents.Toolbar.Surface">
         <item name="titleTextAppearance">@style/TitleHeadline</item>
+        <item name="elevation">0dp</item>
     </style>
 
-    <style name="TextBody" parent="TextAppearance.MaterialComponents.Body1"></style>
+    <style name="StatAppAppBar" parent="Widget.MaterialComponents.AppBarLayout.Primary" >
+        <item name="elevation">0dp</item>
+    </style>
+
+    <style name="TextBody" parent="TextAppearance.MaterialComponents.Body1" />
+
+    <style name="CardPrimary" parent="Widget.MaterialComponents.CardView" >
+        <item name="cardCornerRadius">6dp</item>
+    </style>
 
     <style name="TitleHeadline" parent="TextAppearance.AppCompat.Headline" />
 

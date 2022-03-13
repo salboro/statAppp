@@ -18,7 +18,7 @@ class SelectDetailsFragment : Fragment() {
 
     companion object {
 
-        private const val TOPIC_KEY = "topicKey"
+        const val TOPIC_KEY = "topicKey"
 
         fun newInstance(topicName: String): SelectDetailsFragment =
             SelectDetailsFragment()
@@ -51,6 +51,12 @@ class SelectDetailsFragment : Fragment() {
         subscribeViewModel()
 
         binding?.recycler?.adapter = adapter
+
+        binding?.toolbar?.setNavigationOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+
+        viewModel.loadData()
     }
 
     private fun subscribeViewModel() {
@@ -58,11 +64,20 @@ class SelectDetailsFragment : Fragment() {
         viewModel.navigateToDetailsEvent.observe(viewLifecycleOwner, ::navigateToDetails)
     }
 
-    private fun renderState(state: SelectDetailsState) {}
+    private fun renderState(state: SelectDetailsState) {
+        when (state) {
+            SelectDetailsState.Initial -> Unit
+            SelectDetailsState.Loading -> Unit
+            is SelectDetailsState.Content -> {
+                binding?.toolbar?.title = state.topic
+                adapter?.items = state.items
+            }
+        }
+    }
 
     private fun navigateToDetails(id: String) {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.container, DetailsFragment.newInstance(id))
+            .replace(R.id.mainContainer, DetailsFragment.newInstance(id))
             .addToBackStack(null)
             .commit()
     }

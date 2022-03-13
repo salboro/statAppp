@@ -31,9 +31,11 @@ class FavoriteCategoryViewHolder(
         }
     }
 
-    private fun getDiffColor(value: Long) = if (value > 0) {
-        android.R.color.holo_green_dark
-    } else {
-        android.R.color.holo_red_dark
-    }
+    private fun getDiffColor(value: Double) = itemView.context.getColor(
+        if (value > 0) {
+            R.color.green
+        } else {
+            android.R.color.holo_red_dark
+        }
+    )
 }

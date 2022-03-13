@@ -20,5 +20,6 @@ class DetailsViewModel @Inject constructor(
 
     private fun loadData() {
         _state.value = DetailsState.Loading
+        _state.value = DetailsState.Content("Евро")
     }
 }

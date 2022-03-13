@@ -7,8 +7,8 @@ data class FavoriteCategory(
 
 data class ConcreteStatistic(
     val name: String,
-    val value: Long,
-    val diffValue: Long,
+    val value: Double,
+    val diffValue: Double,
 )
 
 data class StatisticTopic(
