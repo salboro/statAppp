@@ -38,6 +38,7 @@ class FeedStatisticViewHolder(
             firstTopicTitle.text = item.name
             firstCurrentValue.text = item.value.toString()
             firstDiffValue.text = item.diffValue.toString()
+            firstDiffValue.setTextColor(getDiffColor(item.diffValue))
         }
     }
 
@@ -46,6 +47,7 @@ class FeedStatisticViewHolder(
             secondTopicTitle.text = item.name
             secondCurrentValue.text = item.value.toString()
             secondDiffValue.text = item.diffValue.toString()
+            secondDiffValue.setTextColor(getDiffColor(item.diffValue))
         }
     }
 
@@ -54,6 +56,13 @@ class FeedStatisticViewHolder(
             thirdTopicTitle.text = item.name
             thirdCurrentValue.text = item.value.toString()
             thirdDiffValue.text = item.diffValue.toString()
+            thirdDiffValue.setTextColor(getDiffColor(item.diffValue))
         }
+    }
+
+    private fun getDiffColor(value: Long) = if (value > 0) {
+        android.R.color.holo_green_dark
+    } else {
+        android.R.color.holo_red_dark
     }
 }

@@ -27,6 +27,13 @@ class FavoriteCategoryViewHolder(
             title.text = statistic.name
             currentValue.text = statistic.value.toString()
             diffValue.text = statistic.diffValue.toString()
+            diffValue.setTextColor(getDiffColor(statistic.value))
         }
+    }
+
+    private fun getDiffColor(value: Long) = if (value > 0) {
+        android.R.color.holo_green_dark
+    } else {
+        android.R.color.holo_red_dark
     }
 }
