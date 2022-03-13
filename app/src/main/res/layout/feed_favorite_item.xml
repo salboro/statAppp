@@ -27,12 +27,14 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
+            style="@style/TextBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="APPL" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/currentValue"
+            style="@style/TextBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="9333" />

@@ -15,6 +15,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
+            style="@style/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -23,9 +24,11 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/moreButton"
+            style="@style/TextBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/more"
+            app:layout_constraintBaseline_toBaselineOf="@id/title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,21 +40,22 @@
             android:paddingHorizontal="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/moreButton" />
+            app:layout_constraintTop_toBottomOf="@id/title" />
 
         <LinearLayout
             android:id="@+id/firstGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toStartOf="@+id/secondGroup"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/divider">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/firstTopicTitle"
+                style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="MissingConstraints"
@@ -59,6 +63,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/firstCurrentValue"
+                style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="MissingConstraints"
@@ -77,15 +82,16 @@
             android:id="@+id/secondGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toStartOf="@id/thirdGroup"
             app:layout_constraintStart_toEndOf="@id/firstGroup"
             app:layout_constraintTop_toBottomOf="@id/divider">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/secondTopicTitle"
+                style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="MissingConstraints"
@@ -93,6 +99,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/secondCurrentValue"
+                style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="MissingConstraints"
@@ -111,15 +118,16 @@
             android:id="@+id/thirdGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/secondGroup"
             app:layout_constraintTop_toBottomOf="@id/divider">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/thirdTopicTitle"
+                style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="MissingConstraints"
@@ -127,6 +135,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/thirdCurrentValue"
+                style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:ignore="MissingConstraints"

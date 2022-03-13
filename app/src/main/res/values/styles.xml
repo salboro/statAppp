@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="StatAppToolbar" parent="Widget.MaterialComponents.Toolbar.Surface">
+        <item name="titleTextAppearance">@style/TitleHeadline</item>
+    </style>
+
+    <style name="TextBody" parent="TextAppearance.MaterialComponents.Body1"></style>
+
+    <style name="TitleHeadline" parent="TextAppearance.AppCompat.Headline" />
+
+    <style name="Title" parent="TextAppearance.AppCompat.Headline">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+</resources>
