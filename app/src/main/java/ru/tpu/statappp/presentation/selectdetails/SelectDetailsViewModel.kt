@@ -34,12 +34,17 @@ class SelectDetailsViewModel @Inject constructor(
 
     private val topic: String = requireNotNull(arguments[SelectDetailsFragment.TOPIC_KEY])
 
-    fun loadData() {
+    init {
+        loadData()
+    }
+
+    private fun loadData() {
         _state.value = SelectDetailsState.Loading
         viewModelScope.launch {
             when (topic) {
                 CURRENCY_TOPIC -> {
-                    val currencyNames = getCurrencyNamesUseCase().map { SelectDetail(it.key, it.value) }
+                    val currencyNames =
+                        getCurrencyNamesUseCase().map { SelectDetail(it.key, it.value) }
 
                     _state.value = SelectDetailsState.Content(topic, currencyNames)
                 }

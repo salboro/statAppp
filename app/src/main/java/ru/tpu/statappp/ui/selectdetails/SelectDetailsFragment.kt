@@ -55,8 +55,6 @@ class SelectDetailsFragment : Fragment() {
         binding?.toolbar?.setNavigationOnClickListener {
             parentFragmentManager.popBackStack()
         }
-
-        viewModel.loadData()
     }
 
     private fun subscribeViewModel() {

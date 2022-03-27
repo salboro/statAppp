@@ -39,8 +39,6 @@ class FeedFragment : Fragment() {
         adapter = FeedAdapter(viewModel::selectFavorite, viewModel::selectTopic)
         binding?.recycler?.adapter = adapter
 
-        viewModel.loadData()
-
         viewModel.navigateToMoreEvent.observe(viewLifecycleOwner, ::openSelectDetails)
         viewModel.state.observe(viewLifecycleOwner, ::renderState)
     }

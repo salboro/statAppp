@@ -1,6 +1,5 @@
 package ru.tpu.statappp.presentation.feed
 
-import android.text.NoCopySpan
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,7 +25,11 @@ class FeedViewModel @Inject constructor(
     private val _navigateToMoreEvent = SingleLiveEvent<String>()
     val navigateToMoreEvent: LiveData<String> = _navigateToMoreEvent
 
-    fun loadData() {
+    init {
+        loadData()
+    }
+
+    private fun loadData() {
         _state.value = FeedState.Loading
         viewModelScope.launch {
             val feed = getFeedUseCase()
