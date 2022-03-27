@@ -1,6 +1,10 @@
 package ru.tpu.statappp.data.repository
 
 import ru.tpu.statappp.data.api.StatApppi
+import ru.tpu.statappp.domain.entity.CryptoCurrency
+import ru.tpu.statappp.domain.entity.Currency
+import ru.tpu.statappp.domain.entity.Feed
+import ru.tpu.statappp.domain.entity.Stock
 import ru.tpu.statappp.domain.repository.*
 import javax.inject.Inject
 

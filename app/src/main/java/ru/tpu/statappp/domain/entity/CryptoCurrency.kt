@@ -1,4 +1,4 @@
-package ru.tpu.statappp.domain.repository
+package ru.tpu.statappp.domain.entity
 
 data class CryptoCurrency(
     val name: String,

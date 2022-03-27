@@ -12,6 +12,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
+const val BASE_URL = "http://10.0.2.2:8000/"
+
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
@@ -35,5 +37,6 @@ object NetworkModule {
         Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create())
             .client(okHttpClient)
+            .baseUrl(BASE_URL)
             .build()
 }
