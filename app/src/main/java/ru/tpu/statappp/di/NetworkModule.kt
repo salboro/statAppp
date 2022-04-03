@@ -1,5 +1,7 @@
 package ru.tpu.statappp.di
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,7 +15,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import ru.tpu.statappp.data.api.StatApppi
 import javax.inject.Singleton
 
-const val BASE_URL = "http://10.0.2.2:8000/"
+const val BASE_URL = "http://mmsfastapi.herokuapp.com/"
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -34,11 +36,19 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
+        moshi: Moshi,
     ): Retrofit =
         Retrofit.Builder()
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(okHttpClient)
             .baseUrl(BASE_URL)
+            .build()
+
+    @Provides
+    @Singleton
+    fun provideMoshi(): Moshi =
+        Moshi.Builder()
+            .addLast(KotlinJsonAdapterFactory())
             .build()
 
     @Provides

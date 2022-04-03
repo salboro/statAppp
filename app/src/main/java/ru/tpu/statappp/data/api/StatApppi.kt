@@ -1,15 +1,20 @@
 package ru.tpu.statappp.data.api
 
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Query
 import ru.tpu.statappp.data.model.CurrencyDetailedContainerModel
+import ru.tpu.statappp.data.model.FavoriteModel
 import ru.tpu.statappp.data.model.FeedModel
 import java.util.*
 
 interface StatApppi {
 
-    @GET("main_panel")
-    suspend fun getMain(): FeedModel
+    @POST("main_panel")
+    suspend fun getMain(
+        @Body favorites: List<FavoriteModel>
+    ): FeedModel
 
     @GET("currency_panel")
     suspend fun getCurrency(): Map<String, String>
