@@ -55,17 +55,19 @@ class DetailsFragment : Fragment() {
 
         initChart()
         initListeners()
-        binding?.chartResolutionTwoWeeks?.toggle()
 
         viewModel.state.observe(viewLifecycleOwner, ::renderState)
 
-        binding?.favoriteImage?.setOnClickListener {
-            viewModel.changeFavoriteStatus()
-        }
+        binding?.run {
+            favoriteImage.setOnClickListener {
+                viewModel.changeFavoriteStatus()
+            }
 
-        binding?.toolbar?.title = requireArguments().getString(NAME_KEY)
-        binding?.toolbar?.setNavigationOnClickListener {
-            parentFragmentManager.popBackStack()
+            toolbar.title = requireArguments().getString(NAME_KEY)
+            toolbar.setNavigationOnClickListener {
+                parentFragmentManager.popBackStack()
+            }
+            chartResolutionTwoWeeks.toggle()
         }
     }
 
@@ -98,12 +100,14 @@ class DetailsFragment : Fragment() {
             DetailsState.Initial -> Unit
             DetailsState.Loading -> {
                 binding?.run {
+                    favoriteImage.isVisible = false
                     progressBar.isVisible = true
                     content.isVisible = false
                 }
             }
             is DetailsState.Content -> {
                 binding?.run {
+                    favoriteImage.isVisible = true
                     progressBar.isVisible = false
                     content.isVisible = true
 

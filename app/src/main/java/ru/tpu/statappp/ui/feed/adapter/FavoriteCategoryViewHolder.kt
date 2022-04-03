@@ -30,11 +30,18 @@ class FavoriteCategoryViewHolder(
         with(binding) {
             category.text = favoriteCategory.topicName
             title.text = statistic.name
-            currentValue.text = statistic.value.toString()
+            currentValue.text = getStringByValue(statistic.value)
             diffValue.text = statistic.diffValue.toString()
             diffValue.setTextColor(getDiffColor(statistic.value))
         }
     }
+
+    private fun getStringByValue(from: Double): String =
+        if (from >= 0.0) {
+            itemView.context.getString(R.string.value_more_than_zero, from)
+        } else {
+            itemView.context.getString(R.string.value_less_than_zero, from)
+        }
 
     private fun getDiffColor(value: Double) = itemView.context.getColor(
         if (value > 0) {
