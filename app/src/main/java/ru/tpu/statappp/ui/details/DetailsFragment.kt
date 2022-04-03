@@ -117,6 +117,7 @@ class DetailsFragment : Fragment() {
                     val dataSet = LineDataSet(entries, "")
                     chart.xAxis.valueFormatter = DetailsChartLabelFormatter(dataSet)
                     chart.data = LineData(dataSet)
+                    chart.invalidate()
 
                     if (state.favorite) {
                         favoriteImage.setImageDrawable(

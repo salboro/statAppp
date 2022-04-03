@@ -2,6 +2,7 @@ package ru.tpu.statappp.presentation.details
 
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import ru.tpu.statappp.domain.*
 import ru.tpu.statappp.domain.entity.DateResolution
@@ -40,6 +41,8 @@ class DetailsViewModel @Inject constructor(
     private val topic: String = requireNotNull(arguments[DetailsFragment.TOPIC_KEY])
     private val name: String = requireNotNull(arguments[DetailsFragment.NAME_KEY])
 
+    private var dataJob: Job? = null
+
     init {
         resolution.observeForever(::handleResolution)
     }
@@ -50,7 +53,8 @@ class DetailsViewModel @Inject constructor(
 
     private fun loadData(resolution: DateResolution) {
         _state.value = DetailsState.Loading
-        viewModelScope.launch {
+        dataJob?.cancel()
+        dataJob = viewModelScope.launch {
             val details = when (topic) {
                 CURRENCY_TOPIC -> getCurrencyDetailedUseCase(name, resolution)
                 CRYPTO_CURRENCY_TOPIC -> getCryptoDetailedUseCase(name, resolution)
