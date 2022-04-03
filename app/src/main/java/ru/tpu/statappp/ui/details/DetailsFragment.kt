@@ -9,12 +9,14 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import dagger.hilt.android.AndroidEntryPoint
 import ru.tpu.statappp.R
 import ru.tpu.statappp.databinding.FragmentDetailsBinding
+import ru.tpu.statappp.domain.entity.DateResolution
 import ru.tpu.statappp.presentation.details.DetailsState
 import ru.tpu.statappp.presentation.details.DetailsViewModel
 
@@ -44,16 +46,16 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
-        binding?.chart?.data = LineData(
-            LineDataSet(
-                listOf(Entry(1f, 1f)), "GOvno"
-            )
-        )
+
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initChart()
+        initListeners()
+        binding?.chartResolutionTwoWeeks?.toggle()
 
         viewModel.state.observe(viewLifecycleOwner, ::renderState)
 
@@ -64,6 +66,30 @@ class DetailsFragment : Fragment() {
         binding?.toolbar?.title = requireArguments().getString(NAME_KEY)
         binding?.toolbar?.setNavigationOnClickListener {
             parentFragmentManager.popBackStack()
+        }
+    }
+
+    private fun initChart() {
+        binding?.chart?.run {
+            legend.isEnabled = false
+            description.isEnabled = false
+            xAxis.setDrawGridLines(false)
+            xAxis.setLabelCount(2, true)
+            xAxis.position = XAxis.XAxisPosition.BOTTOM
+        }
+    }
+
+    private fun initListeners() {
+        binding?.chartResolutionGroup?.addOnButtonCheckedListener { _, checkedId, _ ->
+            val resolution = when (checkedId) {
+                R.id.chartResolutionTwoWeeks -> DateResolution.TWO_WEEKS
+                R.id.chartResolutionOneMonth -> DateResolution.ONE_MONTH
+                R.id.chartResolutionSixMonth -> DateResolution.SIX_MONTH
+                R.id.chartResolutionOneYear -> DateResolution.ONE_YEAR
+                else -> throw IllegalArgumentException("Unknown dateResolution for id: $checkedId")
+            }
+
+            viewModel.resolution.value = resolution
         }
     }
 
@@ -78,8 +104,16 @@ class DetailsFragment : Fragment() {
             }
             is DetailsState.Content -> {
                 binding?.run {
-                    progressBar.isVisible = true
-                    content.isVisible = false
+                    progressBar.isVisible = false
+                    content.isVisible = true
+
+                    val entries = state.data.entries.mapIndexed { index, entry ->
+                        Entry(index.toFloat(), entry.value.toFloat(), entry.key)
+                    }
+                    val dataSet = LineDataSet(entries, "")
+                    chart.xAxis.valueFormatter = DetailsChartLabelFormatter(dataSet)
+                    chart.data = LineData(dataSet)
+
                     if (state.favorite) {
                         favoriteImage.setImageDrawable(
                             ContextCompat.getDrawable(

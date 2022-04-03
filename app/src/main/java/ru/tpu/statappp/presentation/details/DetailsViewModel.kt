@@ -5,7 +5,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.tpu.statappp.domain.*
 import ru.tpu.statappp.domain.entity.Favorite
+import ru.tpu.statappp.domain.GetCryptoDetailedUseCase
+import ru.tpu.statappp.domain.GetCurrencyDetailedUseCase
+import ru.tpu.statappp.domain.GetStockDetailedUseCase
+import ru.tpu.statappp.domain.entity.DateResolution
 import ru.tpu.statappp.ui.details.DetailsFragment
+import ru.tpu.statappp.util.SingleLiveEvent
 import javax.inject.Inject
 
 @HiltViewModel
@@ -33,23 +38,30 @@ class DetailsViewModel @Inject constructor(
     private val _state = MutableLiveData<DetailsState>(DetailsState.Initial)
     val state: LiveData<DetailsState> = _state
 
+    val resolution = SingleLiveEvent<DateResolution>()
+
     private val topic: String = requireNotNull(arguments[DetailsFragment.TOPIC_KEY])
     private val name: String = requireNotNull(arguments[DetailsFragment.NAME_KEY])
 
     init {
-        loadData()
+        resolution.observeForever(::handleResolution)
     }
 
-    private fun loadData() {
+    private fun handleResolution(resolution: DateResolution) {
+        loadData(resolution)
+    }
+
+    private fun loadData(resolution: DateResolution) {
         _state.value = DetailsState.Loading
         viewModelScope.launch {
-            when (topic) {
-                CURRENCY_TOPIC -> {}
-
-                CRYPTO_CURRENCY_TOPIC -> {}
-
-                STOCK_TOPIC -> {}
+            val details = when (topic) {
+                CURRENCY_TOPIC -> getCurrencyDetailedUseCase(name, resolution)
+                CRYPTO_CURRENCY_TOPIC -> getCryptoDetailedUseCase(name, resolution)
+                STOCK_TOPIC -> getStockDetailedUseCase(name, resolution)
+                else -> throw IllegalStateException("Not supported topic: $topic")
             }
+
+            _state.value = DetailsState.Content(details)
         }
     }
 

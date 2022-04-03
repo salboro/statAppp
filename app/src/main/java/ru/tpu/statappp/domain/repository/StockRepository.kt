@@ -1,10 +1,10 @@
 package ru.tpu.statappp.domain.repository
 
-import java.util.*
+import ru.tpu.statappp.domain.entity.DateResolution
 
 interface StockRepository {
 
     suspend fun getNames(): List<String>
 
-    suspend fun getStatistic(ticker: String, start: Date, end: Date): Map<String, Double>
+    suspend fun getStatistic(ticker: String, resolution: DateResolution): Map<String, Double>
 }

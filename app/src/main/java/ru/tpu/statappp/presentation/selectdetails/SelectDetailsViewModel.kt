@@ -50,7 +50,6 @@ class SelectDetailsViewModel @Inject constructor(
 
             _state.value = SelectDetailsState.Content(items)
         }
-
     }
 
     fun selectDetails(item: SelectDetail) {

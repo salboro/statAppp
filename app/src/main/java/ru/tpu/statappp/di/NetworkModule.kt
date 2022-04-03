@@ -12,6 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.HttpLoggingInterceptor.Level
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import ru.tpu.statappp.data.api.DateConverterFactory
 import ru.tpu.statappp.data.api.StatApppi
 import javax.inject.Singleton
 
@@ -37,8 +38,10 @@ object NetworkModule {
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
         moshi: Moshi,
+        dateConverterFactory: DateConverterFactory,
     ): Retrofit =
         Retrofit.Builder()
+            .addConverterFactory(dateConverterFactory)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(okHttpClient)
             .baseUrl(BASE_URL)
