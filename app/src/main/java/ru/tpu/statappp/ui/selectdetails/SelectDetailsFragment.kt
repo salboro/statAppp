@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +51,7 @@ class SelectDetailsFragment : Fragment() {
 
         subscribeViewModel()
 
+        binding?.toolbar?.title = requireArguments().getString(TOPIC_KEY)
         binding?.recycler?.adapter = adapter
 
         binding?.toolbar?.setNavigationOnClickListener {
@@ -65,9 +67,17 @@ class SelectDetailsFragment : Fragment() {
     private fun renderState(state: SelectDetailsState) {
         when (state) {
             SelectDetailsState.Initial -> Unit
-            SelectDetailsState.Loading -> Unit
+            SelectDetailsState.Loading -> {
+                binding?.run {
+                    progressBar.isVisible = true
+                    recycler.isVisible = false
+                }
+            }
             is SelectDetailsState.Content -> {
-                binding?.toolbar?.title = state.topic
+                binding?.run {
+                    progressBar.isVisible = false
+                    recycler.isVisible = true
+                }
                 adapter?.items = state.items
             }
         }

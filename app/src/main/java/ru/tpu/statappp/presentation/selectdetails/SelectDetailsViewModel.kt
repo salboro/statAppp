@@ -46,19 +46,19 @@ class SelectDetailsViewModel @Inject constructor(
                     val currencyNames =
                         getCurrencyNamesUseCase().map { SelectDetail(it.key, it.value) }
 
-                    _state.value = SelectDetailsState.Content(topic, currencyNames)
+                    _state.value = SelectDetailsState.Content(currencyNames)
                 }
 
                 CRYPTO_CURRENCY_TOPIC -> {
                     val cryptoCurrencyNames = getCryptoCurrencyNamesUseCase().map { SelectDetail(it, it) }
 
-                    _state.value = SelectDetailsState.Content(topic, cryptoCurrencyNames)
+                    _state.value = SelectDetailsState.Content(cryptoCurrencyNames)
                 }
 
                 STOCK_TOPIC -> {
                     val stockNames = getStockNamesUseCase().map { SelectDetail(it, it) }
 
-                    _state.value = SelectDetailsState.Content(topic, stockNames)
+                    _state.value = SelectDetailsState.Content(stockNames)
                 }
             }
         }
