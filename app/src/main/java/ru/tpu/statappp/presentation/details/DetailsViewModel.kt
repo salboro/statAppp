@@ -3,9 +3,8 @@ package ru.tpu.statappp.presentation.details
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import ru.tpu.statappp.domain.GetCryptoDetailedUseCase
-import ru.tpu.statappp.domain.GetCurrencyDetailedUseCase
-import ru.tpu.statappp.domain.GetStockDetailedUseCase
+import ru.tpu.statappp.domain.*
+import ru.tpu.statappp.domain.entity.Favorite
 import ru.tpu.statappp.ui.details.DetailsFragment
 import javax.inject.Inject
 
@@ -15,6 +14,10 @@ class DetailsViewModel @Inject constructor(
     private val getCurrencyDetailedUseCase: GetCurrencyDetailedUseCase,
     private val getCryptoDetailedUseCase: GetCryptoDetailedUseCase,
     private val getStockDetailedUseCase: GetStockDetailedUseCase,
+    private val getFavoritesUseCase: GetFavoritesUseCase,
+    private val addFavoriteUseCase: AddFavoriteUseCase,
+    private val deleteFavoriteUseCase: DeleteFavoriteUseCase,
+    private val isFavoriteUseCase: IsFavoriteUseCase,
 ) : ViewModel() {
 
     private companion object {
@@ -22,6 +25,9 @@ class DetailsViewModel @Inject constructor(
         const val CURRENCY_TOPIC = "Валюта"
         const val STOCK_TOPIC = "Акции"
         const val CRYPTO_CURRENCY_TOPIC = "Криптовалюта"
+        const val CURRENCY_TYPE = "currency"
+        const val STOCK_TYPE = "stock"
+        const val CRYPTO_CURRENCY_TYPE = "cryptocurrency"
     }
 
     private val _state = MutableLiveData<DetailsState>(DetailsState.Initial)
@@ -46,4 +52,33 @@ class DetailsViewModel @Inject constructor(
             }
         }
     }
+
+    private fun isFavorite(type: String, name: String): Boolean =
+        isFavoriteUseCase(Favorite(type, name))
+
+    fun changeFavoriteStatus() {
+        val currentContent = getCurrencyContent()
+        if (currentContent.favorite) {
+            deleteFavoriteUseCase(Favorite(convertTopicToType(topic), name))
+            _state.value = currentContent.copy(favorite = false)
+        } else {
+            addFavoriteUseCase(Favorite(convertTopicToType(topic), name))
+            _state.value = currentContent.copy(favorite = true)
+        }
+    }
+
+    private fun getCurrencyContent(): DetailsState.Content =
+        if (_state.value is DetailsState.Content) {
+            _state.value as DetailsState.Content
+        } else {
+            throw IllegalStateException("State is not content")
+        }
+
+    private fun convertTopicToType(from: String): String =
+        when (from) {
+            CURRENCY_TOPIC -> CURRENCY_TYPE
+            STOCK_TOPIC -> STOCK_TYPE
+            CRYPTO_CURRENCY_TOPIC -> CRYPTO_CURRENCY_TYPE
+            else -> throw IllegalArgumentException("Illegal topic")
+        }
 }

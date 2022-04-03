@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import dagger.hilt.android.AndroidEntryPoint
+import ru.tpu.statappp.R
 import ru.tpu.statappp.databinding.FragmentDetailsBinding
 import ru.tpu.statappp.presentation.details.DetailsState
 import ru.tpu.statappp.presentation.details.DetailsViewModel
@@ -55,6 +57,10 @@ class DetailsFragment : Fragment() {
 
         viewModel.state.observe(viewLifecycleOwner, ::renderState)
 
+        binding?.favoriteImage?.setOnClickListener {
+            viewModel.changeFavoriteStatus()
+        }
+
         binding?.toolbar?.title = requireArguments().getString(NAME_KEY)
         binding?.toolbar?.setNavigationOnClickListener {
             parentFragmentManager.popBackStack()
@@ -74,6 +80,21 @@ class DetailsFragment : Fragment() {
                 binding?.run {
                     progressBar.isVisible = true
                     content.isVisible = false
+                    if (state.favorite) {
+                        favoriteImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.ic_baseline_favorite_24
+                            )
+                        )
+                    } else {
+                        favoriteImage.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                requireContext(),
+                                R.drawable.ic_baseline_favorite_border_24
+                            )
+                        )
+                    }
                 }
             }
         }
