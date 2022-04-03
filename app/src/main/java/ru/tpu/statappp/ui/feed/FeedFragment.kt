@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,8 +47,19 @@ class FeedFragment : Fragment() {
     private fun renderState(state: FeedState) {
         when (state) {
             FeedState.Initial -> Unit
-            FeedState.Loading -> Unit
-            is FeedState.Content -> adapter?.items = state.items
+            FeedState.Loading -> {
+                binding?.run {
+                    progressBar.isVisible = true
+                    recycler.isVisible = false
+                }
+            }
+            is FeedState.Content -> {
+                binding?.run {
+                    progressBar.isVisible = false
+                    recycler.isVisible = true
+                }
+                adapter?.items = state.items
+            }
         }
     }
 
