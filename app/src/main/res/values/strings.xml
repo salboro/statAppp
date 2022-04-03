@@ -3,4 +3,6 @@
 
     <string name="feed_title">Главная</string>
     <string name="more">Ещё</string>
+    <string name="value_more_than_zero">%1$.2f</string>
+    <string name="value_less_than_zero">%1$.5f</string>
 </resources>

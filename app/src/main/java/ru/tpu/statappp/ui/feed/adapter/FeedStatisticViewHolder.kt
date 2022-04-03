@@ -36,7 +36,7 @@ class FeedStatisticViewHolder(
     private fun bindFirstItem(item: ConcreteStatistic) {
         with(binding) {
             firstTopicTitle.text = item.name
-            firstCurrentValue.text = item.value.toString()
+            firstCurrentValue.text = getStringByValue(item.value)
             firstDiffValue.text = item.diffValue.toString()
             item.diffValue?.let { firstDiffValue.setTextColor(getDiffColor(it)) }
         }
@@ -45,7 +45,7 @@ class FeedStatisticViewHolder(
     private fun bindSecondItem(item: ConcreteStatistic) {
         with(binding) {
             secondTopicTitle.text = item.name
-            secondCurrentValue.text = item.value.toString()
+            secondCurrentValue.text = getStringByValue(item.value)
             secondDiffValue.text = item.diffValue.toString()
             item.diffValue?.let { secondDiffValue.setTextColor(getDiffColor(it)) }
         }
@@ -54,11 +54,18 @@ class FeedStatisticViewHolder(
     private fun bindThirdItem(item: ConcreteStatistic) {
         with(binding) {
             thirdTopicTitle.text = item.name
-            thirdCurrentValue.text = item.value.toString()
+            thirdCurrentValue.text = getStringByValue(item.value)
             thirdDiffValue.text = item.diffValue.toString()
             item.diffValue?.let { thirdDiffValue.setTextColor(getDiffColor(it)) }
         }
     }
+
+    private fun getStringByValue(from: Double): String =
+        if (from >= 0.0) {
+            itemView.context.getString(R.string.value_more_than_zero, from)
+        } else {
+            itemView.context.getString(R.string.value_less_than_zero, from)
+        }
 
     private fun getDiffColor(value: Double) = itemView.context.getColor(
         if (value > 0) {

@@ -45,7 +45,7 @@
 
         <LinearLayout
             android:id="@+id/firstGroup"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
@@ -60,7 +60,8 @@
                 style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints"
+                android:ellipsize="end"
+                android:maxLines="1"
                 tools:text="Dollar" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -68,21 +69,24 @@
                 style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints"
+                android:ellipsize="end"
+                android:maxLines="1"
                 tools:text="72.01" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/firstDiffValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:visibility="gone"
                 tools:text="2.07" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/secondGroup"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
@@ -96,29 +100,33 @@
                 style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints"
-                tools:text="Dollar" />
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="Dollar123123123112323123123" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/secondCurrentValue"
                 style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints"
+                android:ellipsize="end"
+                android:maxLines="1"
                 tools:text="72.01" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/secondDiffValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:visibility="gone"
                 tools:text="2.07" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/thirdGroup"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
@@ -132,7 +140,8 @@
                 style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints"
+                android:ellipsize="end"
+                android:maxLines="1"
                 tools:text="Dollar" />
 
             <com.google.android.material.textview.MaterialTextView
@@ -140,14 +149,17 @@
                 style="@style/TextBody"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints"
+                android:ellipsize="end"
+                android:maxLines="1"
                 tools:text="72.01" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/thirdDiffValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:ignore="MissingConstraints"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:visibility="gone"
                 tools:text="2.07" />
 
         </LinearLayout>
