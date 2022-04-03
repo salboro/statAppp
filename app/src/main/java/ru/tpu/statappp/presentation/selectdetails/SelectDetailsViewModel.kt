@@ -29,8 +29,8 @@ class SelectDetailsViewModel @Inject constructor(
     private val _state = MutableLiveData<SelectDetailsState>(SelectDetailsState.Initial)
     val state: LiveData<SelectDetailsState> = _state
 
-    private val _navigateToDetailsEvent = SingleLiveEvent<String>()
-    val navigateToDetailsEvent: LiveData<String> = _navigateToDetailsEvent
+    private val _navigateToDetailsEvent = SingleLiveEvent<Pair<String, String>>()
+    val navigateToDetailsEvent: LiveData<Pair<String, String>> = _navigateToDetailsEvent
 
     private val topic: String = requireNotNull(arguments[SelectDetailsFragment.TOPIC_KEY])
 
@@ -66,6 +66,6 @@ class SelectDetailsViewModel @Inject constructor(
     }
 
     fun selectDetails(item: SelectDetail) {
-        _navigateToDetailsEvent.value = item.id
+        _navigateToDetailsEvent.value = item.id to topic
     }
 }

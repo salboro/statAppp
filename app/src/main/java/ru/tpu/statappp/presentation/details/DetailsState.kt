@@ -6,5 +6,5 @@ sealed interface DetailsState {
 
     object Loading : DetailsState
 
-    data class Content(val title: String) : DetailsState
+    data class Content(val data: Map<String, Double>) : DetailsState
 }

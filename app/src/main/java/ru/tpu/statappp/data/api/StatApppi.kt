@@ -4,7 +4,6 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
-import ru.tpu.statappp.data.model.CurrencyDetailedContainerModel
 import ru.tpu.statappp.data.model.FavoriteModel
 import ru.tpu.statappp.data.model.FeedModel
 import java.util.*
@@ -24,7 +23,7 @@ interface StatApppi {
         @Query("currency") currency: String,
         @Query("start") start: Date,
         @Query("end") end: Date,
-    ): CurrencyDetailedContainerModel
+    ): Map<String, Double>
 
     @GET("stock_panel")
     suspend fun getStock(): List<String>
@@ -38,4 +37,11 @@ interface StatApppi {
 
     @GET("cryptocurrency_panel")
     suspend fun getCryptoCurrency(): List<String>
+
+    @GET("cryptocurrency_detailed_panel")
+    suspend fun getCryptoDetailed(
+        @Query("cryptocurrency") cryptoCurrency: String,
+        @Query("start") start: Date,
+        @Query("end") end: Date,
+    ): Map<String, Double>
 }

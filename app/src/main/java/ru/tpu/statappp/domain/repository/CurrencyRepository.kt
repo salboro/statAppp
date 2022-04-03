@@ -6,5 +6,5 @@ interface CurrencyRepository {
 
     suspend fun getNames(): Map<String, String>
 
-    suspend fun getStatistic(ticker: String, start: Date, end: Date): Map<Date, String>
+    suspend fun getStatistic(currency: String, start: Date, end: Date): Map<String, Double>
 }

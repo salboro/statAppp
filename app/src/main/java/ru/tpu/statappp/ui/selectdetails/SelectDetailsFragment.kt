@@ -83,9 +83,10 @@ class SelectDetailsFragment : Fragment() {
         }
     }
 
-    private fun navigateToDetails(id: String) {
+    private fun navigateToDetails(idToName: Pair<String, String>) {
+        val (id, name) = idToName
         parentFragmentManager.beginTransaction()
-            .replace(R.id.mainContainer, DetailsFragment.newInstance(id))
+            .replace(R.id.mainContainer, DetailsFragment.newInstance(id, name))
             .addToBackStack(null)
             .commit()
     }

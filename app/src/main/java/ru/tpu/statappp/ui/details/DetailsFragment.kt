@@ -5,8 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.data.LineDataSet
 import dagger.hilt.android.AndroidEntryPoint
 import ru.tpu.statappp.databinding.FragmentDetailsBinding
 import ru.tpu.statappp.presentation.details.DetailsState
@@ -17,11 +21,15 @@ class DetailsFragment : Fragment() {
 
     companion object {
 
-        const val ID_KEY = "ID_KEY"
+        const val TOPIC_KEY = "TOPIC_KEY"
+        const val NAME_KEY = "NAME_KEY"
 
-        fun newInstance(id: String): Fragment =
+        fun newInstance(topicKey: String, nameKey: String): Fragment =
             DetailsFragment().apply {
-                arguments = bundleOf(ID_KEY to id)
+                arguments = bundleOf(
+                    TOPIC_KEY to topicKey,
+                    NAME_KEY to nameKey
+                )
             }
     }
 
@@ -34,7 +42,11 @@ class DetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
-
+        binding?.chart?.data = LineData(
+            LineDataSet(
+                listOf(Entry(1f, 1f)), "GOvno"
+            )
+        )
         return binding?.root
     }
 
@@ -43,17 +55,26 @@ class DetailsFragment : Fragment() {
 
         viewModel.state.observe(viewLifecycleOwner, ::renderState)
 
+        binding?.toolbar?.title = requireArguments().getString(NAME_KEY)
         binding?.toolbar?.setNavigationOnClickListener {
             parentFragmentManager.popBackStack()
         }
     }
 
     private fun renderState(state: DetailsState) {
-        when(state) {
+        when (state) {
             DetailsState.Initial -> Unit
-            DetailsState.Loading -> Unit
+            DetailsState.Loading -> {
+                binding?.run {
+                    progressBar.isVisible = true
+                    content.isVisible = false
+                }
+            }
             is DetailsState.Content -> {
-                binding?.toolbar?.title = state.title
+                binding?.run {
+                    progressBar.isVisible = true
+                    content.isVisible = false
+                }
             }
         }
     }
