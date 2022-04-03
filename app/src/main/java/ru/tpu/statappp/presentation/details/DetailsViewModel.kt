@@ -4,11 +4,8 @@ import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import ru.tpu.statappp.domain.*
-import ru.tpu.statappp.domain.entity.Favorite
-import ru.tpu.statappp.domain.GetCryptoDetailedUseCase
-import ru.tpu.statappp.domain.GetCurrencyDetailedUseCase
-import ru.tpu.statappp.domain.GetStockDetailedUseCase
 import ru.tpu.statappp.domain.entity.DateResolution
+import ru.tpu.statappp.domain.entity.Favorite
 import ru.tpu.statappp.ui.details.DetailsFragment
 import ru.tpu.statappp.util.SingleLiveEvent
 import javax.inject.Inject
@@ -61,7 +58,10 @@ class DetailsViewModel @Inject constructor(
                 else -> throw IllegalStateException("Not supported topic: $topic")
             }
 
-            _state.value = DetailsState.Content(details)
+            _state.value = DetailsState.Content(
+                data = details,
+                favorite = isFavorite(convertTopicToType(topic), name)
+            )
         }
     }
 

@@ -29,11 +29,7 @@ class FeedViewModel @Inject constructor(
     private val _navigateToMoreEvent = SingleLiveEvent<String>()
     val navigateToMoreEvent: LiveData<String> = _navigateToMoreEvent
 
-    init {
-        loadData()
-    }
-
-    private fun loadData() {
+    fun loadData() {
         _state.value = FeedState.Loading
         viewModelScope.launch {
             val feed = getFeedUseCase()

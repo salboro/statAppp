@@ -43,6 +43,8 @@ class FeedFragment : Fragment() {
 
         viewModel.navigateToMoreEvent.observe(viewLifecycleOwner, ::openSelectDetails)
         viewModel.state.observe(viewLifecycleOwner, ::renderState)
+
+        viewModel.loadData()
     }
 
     private fun renderState(state: FeedState) {
