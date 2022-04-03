@@ -11,14 +11,15 @@ import ru.tpu.statappp.util.create
 
 class FeedStatisticViewHolder(
     parent: ViewGroup,
-    private val onClick: (StatisticTopic) -> Unit,
+    private val onMoreClick: (StatisticTopic) -> Unit,
+    private val onTopicClick: (topicName: String, name: String) -> Unit,
 ) : RecyclerView.ViewHolder(create(parent, R.layout.feed_statistic_item)) {
 
     private val binding = FeedStatisticItemBinding.bind(itemView)
     private lateinit var statisticTopic: StatisticTopic
 
     init {
-        binding.moreButton.setOnClickListener { onClick(statisticTopic) }
+        binding.moreButton.setOnClickListener { onMoreClick(statisticTopic) }
     }
 
     fun bind(item: FeedItem.Topic) {
@@ -39,6 +40,9 @@ class FeedStatisticViewHolder(
             firstCurrentValue.text = getStringByValue(item.value)
             firstDiffValue.text = item.diffValue.toString()
             item.diffValue?.let { firstDiffValue.setTextColor(getDiffColor(it)) }
+            firstGroup.setOnClickListener {
+                onTopicClick(statisticTopic.topicName, item.name)
+            }
         }
     }
 
@@ -48,6 +52,9 @@ class FeedStatisticViewHolder(
             secondCurrentValue.text = getStringByValue(item.value)
             secondDiffValue.text = item.diffValue.toString()
             item.diffValue?.let { secondDiffValue.setTextColor(getDiffColor(it)) }
+            secondGroup.setOnClickListener {
+                onTopicClick(statisticTopic.topicName, item.name)
+            }
         }
     }
 
@@ -57,6 +64,9 @@ class FeedStatisticViewHolder(
             thirdCurrentValue.text = getStringByValue(item.value)
             thirdDiffValue.text = item.diffValue.toString()
             item.diffValue?.let { thirdDiffValue.setTextColor(getDiffColor(it)) }
+            thirdGroup.setOnClickListener {
+                onTopicClick(statisticTopic.topicName, item.name)
+            }
         }
     }
 

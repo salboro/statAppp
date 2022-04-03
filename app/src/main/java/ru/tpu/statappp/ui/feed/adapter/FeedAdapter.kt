@@ -8,8 +8,8 @@ import ru.tpu.statappp.domain.entity.StatisticTopic
 import ru.tpu.statappp.ui.feed.FeedItem
 
 class FeedAdapter(
-    private val onFavoriteClick: (FavoriteCategory) -> Unit,
     private val onTopicMoreClick: (StatisticTopic) -> Unit,
+    private val onTopicClick: (topicName: String, name: String) -> Unit,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private companion object {
@@ -33,8 +33,8 @@ class FeedAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
-            FAVORITE_CONTAINER_VIEW -> FeedFavoritesContainerViewHolder(parent, onFavoriteClick)
-            STATISTIC_TOPIC_VIEW -> FeedStatisticViewHolder(parent, onTopicMoreClick)
+            FAVORITE_CONTAINER_VIEW -> FeedFavoritesContainerViewHolder(parent, onTopicClick)
+            STATISTIC_TOPIC_VIEW -> FeedStatisticViewHolder(parent, onTopicMoreClick, onTopicClick)
             else -> throw IllegalArgumentException("Unknown viewType: $viewType")
         }
 

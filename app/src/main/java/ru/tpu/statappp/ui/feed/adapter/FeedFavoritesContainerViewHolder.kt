@@ -10,7 +10,7 @@ import ru.tpu.statappp.util.create
 
 class FeedFavoritesContainerViewHolder(
     parent: ViewGroup,
-    private val onClick: (FavoriteCategory) -> Unit
+    private val onClick: (topicName: String, name: String) -> Unit
 ) : RecyclerView.ViewHolder(create(parent, R.layout.feed_favorites_container_item)) {
 
     private val binding = FeedFavoritesContainerItemBinding.bind(itemView)

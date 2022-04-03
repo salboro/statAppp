@@ -9,14 +9,19 @@ import ru.tpu.statappp.util.create
 
 class FavoriteCategoryViewHolder(
     parent: ViewGroup,
-    onClick: (FavoriteCategory) -> Unit,
+    onClick: (topicName: String, name: String) -> Unit,
 ) : RecyclerView.ViewHolder(create(parent, R.layout.feed_favorite_item)) {
 
     private val binding = FeedFavoriteItemBinding.bind(itemView)
     private lateinit var favoriteCategory: FavoriteCategory
 
     init {
-        binding.root.setOnClickListener { onClick(favoriteCategory) }
+        binding.root.setOnClickListener {
+            onClick(
+                favoriteCategory.topicName,
+                favoriteCategory.statistic.name
+            )
+        }
     }
 
     fun bind(favoriteCategory: FavoriteCategory) {

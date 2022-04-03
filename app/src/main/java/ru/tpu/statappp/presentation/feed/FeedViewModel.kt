@@ -59,8 +59,4 @@ class FeedViewModel @Inject constructor(
     fun selectTopic(topic: StatisticTopic) {
         _navigateToMoreEvent.value = topic.topicName
     }
-
-    fun selectFavorite(favorite: FavoriteCategory) {
-
-    }
 }

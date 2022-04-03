@@ -12,6 +12,7 @@ import ru.tpu.statappp.R
 import ru.tpu.statappp.databinding.FragmentFeedBinding
 import ru.tpu.statappp.presentation.feed.FeedState
 import ru.tpu.statappp.presentation.feed.FeedViewModel
+import ru.tpu.statappp.ui.details.DetailsFragment
 import ru.tpu.statappp.ui.feed.adapter.FeedAdapter
 import ru.tpu.statappp.ui.selectdetails.SelectDetailsFragment
 
@@ -37,7 +38,7 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = FeedAdapter(viewModel::selectFavorite, viewModel::selectTopic)
+        adapter = FeedAdapter(viewModel::selectTopic, ::openDetails)
         binding?.recycler?.adapter = adapter
 
         viewModel.navigateToMoreEvent.observe(viewLifecycleOwner, ::openSelectDetails)
@@ -61,6 +62,13 @@ class FeedFragment : Fragment() {
                 adapter?.items = state.items
             }
         }
+    }
+
+    private fun openDetails(topicName: String, name: String) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.mainContainer, DetailsFragment.newInstance(topicName, name))
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun openSelectDetails(topic: String) {

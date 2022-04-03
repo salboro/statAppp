@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.tpu.statappp.domain.entity.FavoriteCategory
 
 class FavoritesContainerAdapter(
-    private val onClick: (FavoriteCategory) -> Unit,
+    private val onClick: (topicName: String, name: String) -> Unit,
 ) : RecyclerView.Adapter<FavoriteCategoryViewHolder>() {
 
     var items: List<FavoriteCategory> = emptyList()
