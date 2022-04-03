@@ -41,7 +41,7 @@ class FeedStatisticViewHolder(
             firstDiffValue.text = item.diffValue.toString()
             item.diffValue?.let { firstDiffValue.setTextColor(getDiffColor(it)) }
             firstGroup.setOnClickListener {
-                onTopicClick(statisticTopic.topicName, item.name)
+                onTopicClick(statisticTopic.topicName, item.shortName ?: item.name)
             }
         }
     }
@@ -53,7 +53,7 @@ class FeedStatisticViewHolder(
             secondDiffValue.text = item.diffValue.toString()
             item.diffValue?.let { secondDiffValue.setTextColor(getDiffColor(it)) }
             secondGroup.setOnClickListener {
-                onTopicClick(statisticTopic.topicName, item.name)
+                onTopicClick(statisticTopic.topicName, item.shortName ?: item.name)
             }
         }
     }
@@ -65,7 +65,7 @@ class FeedStatisticViewHolder(
             thirdDiffValue.text = item.diffValue.toString()
             item.diffValue?.let { thirdDiffValue.setTextColor(getDiffColor(it)) }
             thirdGroup.setOnClickListener {
-                onTopicClick(statisticTopic.topicName, item.name)
+                onTopicClick(statisticTopic.topicName, item.shortName ?: item.name)
             }
         }
     }

@@ -7,6 +7,7 @@ data class FavoriteCategory(
 
 data class ConcreteStatistic(
     val name: String,
+    val shortName: String?,
     val value: Double,
     val diffValue: Double?,
 )

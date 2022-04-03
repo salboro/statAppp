@@ -41,31 +41,19 @@ class SelectDetailsViewModel @Inject constructor(
     private fun loadData() {
         _state.value = SelectDetailsState.Loading
         viewModelScope.launch {
-            when (topic) {
-                CURRENCY_TOPIC -> {
-                    val currencyNames =
-                        getCurrencyNamesUseCase().map { SelectDetail(it.key, it.value) }
-
-                    _state.value = SelectDetailsState.Content(currencyNames)
-                }
-
-                CRYPTO_CURRENCY_TOPIC -> {
-                    val cryptoCurrencyNames = getCryptoCurrencyNamesUseCase().map { SelectDetail(it, it) }
-
-                    _state.value = SelectDetailsState.Content(cryptoCurrencyNames)
-                }
-
-                STOCK_TOPIC -> {
-                    val stockNames = getStockNamesUseCase().map { SelectDetail(it, it) }
-
-                    _state.value = SelectDetailsState.Content(stockNames)
-                }
+            val items = when (topic) {
+                CURRENCY_TOPIC -> getCurrencyNamesUseCase().map { SelectDetail(it.key, it.value) }
+                CRYPTO_CURRENCY_TOPIC -> getCryptoCurrencyNamesUseCase().map { SelectDetail(it, it) }
+                STOCK_TOPIC -> getStockNamesUseCase().map { SelectDetail(it, it) }
+                else -> throw IllegalStateException("Illegal topic")
             }
+
+            _state.value = SelectDetailsState.Content(items)
         }
 
     }
 
     fun selectDetails(item: SelectDetail) {
-        _navigateToDetailsEvent.value = item.id to topic
+        _navigateToDetailsEvent.value = topic to item.id
     }
 }

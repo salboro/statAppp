@@ -9,16 +9,19 @@ import ru.tpu.statappp.ui.feed.FeedItem
 
 val concreteStatistic1 = ConcreteStatistic(
     "Доллары",
+    "USD",
     123.2,
     12.0
 )
 val concreteStatistic2 = ConcreteStatistic(
     "ETH",
+    null,
     1232.78,
     12.12
 )
 val concreteStatistic3 = ConcreteStatistic(
     "Сбербанк",
+    null,
     0.1,
     -123.1
 )
